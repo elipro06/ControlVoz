@@ -22,7 +22,7 @@ port = 1883
 client1 = paho.Client("VOICE-CLIENT")
 client1.on_message = on_message
 
-# ==== ESTILOS MÁS SIMPLES Y EFECTIVOS ====
+# ==== ESTILOS CON TEXTO NEGRO ====
 st.markdown("""
     <style>
         .stApp {
@@ -30,8 +30,8 @@ st.markdown("""
             font-family: sans-serif;
         }
 
-        h1, h3, p {
-            color: #222222;
+        h1, h3, p, div, .mensaje {
+            color: #000000 !important;
             text-align: center;
         }
 
@@ -63,12 +63,10 @@ st.markdown("""
         .mensaje {
             margin-top: 1em;
             background-color: #e3f2fd;
-            color: #0d47a1;
             padding: 1em;
             border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
-            text-align: center;
         }
     </style>
 """, unsafe_allow_html=True)
