@@ -127,5 +127,10 @@ if result and "GET_TEXT" in result:
     st.markdown(f"<div class='mensaje'>📢 {text_result}</div>", unsafe_allow_html=True)
     client1.on_publish = on_publish
     client1.connect(broker, port)
-    message = json.dumps({"Act1": text
+    message = json.dumps({"Act1": text_result.strip()})
+    ret = client1.publish("voice_ctrl", message)
 
+    try:
+        os.mkdir("temp")
+    except:
+        pass
