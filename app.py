@@ -22,27 +22,27 @@ port = 1883
 client1 = paho.Client("VOICE-CLIENT")
 client1.on_message = on_message
 
-# Estilos actualizados
+# Estilos con alto contraste para mayor legibilidad
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
         .stApp {
-            background-color: #f1f8f6;
+            background-color: #f9fafb;
             font-family: 'Inter', sans-serif;
             padding: 1rem;
         }
 
         h1, h2, h3, p {
-            color: #003d33;
+            color: #1a1a1a;
             text-align: center;
         }
 
         .stButton>button {
-            background: linear-gradient(to right, #009688, #00796b);
+            background: #1e88e5;
             color: white;
-            border-radius: 12px;
-            padding: 0.5em 1.5em;
+            border-radius: 10px;
+            padding: 0.6em 1.6em;
             border: none;
             font-weight: 600;
             font-size: 1rem;
@@ -51,28 +51,28 @@ st.markdown("""
         }
 
         .stButton>button:hover {
-            background: #004d40;
-            transform: scale(1.05);
+            background: #1565c0;
+            transform: scale(1.03);
         }
 
         .caja {
             background-color: #ffffff;
-            border-left: 5px solid #009688;
-            padding: 1.8em;
-            border-radius: 14px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #1e88e5;
+            padding: 1.5em;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin-top: 1em;
         }
 
         .mensaje {
-            background-color: #c8e6c9;
+            background-color: #e3f2fd;
             padding: 1em;
             border-radius: 10px;
             margin-top: 1em;
             text-align: center;
             font-weight: 600;
-            font-size: 1rem;
-            color: #2e7d32;
+            font-size: 1.05rem;
+            color: #0d47a1;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -127,10 +127,5 @@ if result and "GET_TEXT" in result:
     st.markdown(f"<div class='mensaje'>📢 {text_result}</div>", unsafe_allow_html=True)
     client1.on_publish = on_publish
     client1.connect(broker, port)
-    message = json.dumps({"Act1": text_result.strip()})
-    ret = client1.publish("voice_ctrl", message)
+    message = json.dumps({"Act1": text
 
-    try:
-        os.mkdir("temp")
-    except:
-        pass
