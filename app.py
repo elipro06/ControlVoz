@@ -22,63 +22,64 @@ port = 1883
 client1 = paho.Client("VOICE-CLIENT")
 client1.on_message = on_message
 
-# Estilos con alto contraste para mayor legibilidad
+# ======= ESTILOS MEJORADOS =======
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
         .stApp {
-            background-color: #f9fafb;
+            background-color: #ffffff;
             font-family: 'Inter', sans-serif;
-            padding: 1rem;
         }
 
         h1, h2, h3, p {
             color: #1a1a1a;
+            font-size: 1.3rem;
             text-align: center;
         }
 
         .stButton>button {
-            background: #1e88e5;
-            color: white;
-            border-radius: 10px;
-            padding: 0.6em 1.6em;
+            background-color: #4a90e2;
+            color: #ffffff;
             border: none;
-            font-weight: 600;
+            border-radius: 12px;
+            padding: 0.75em 1.5em;
             font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .stButton>button:hover {
-            background: #1565c0;
-            transform: scale(1.03);
+            background-color: #357ABD;
+            transform: scale(1.05);
         }
 
         .caja {
-            background-color: #ffffff;
-            border-left: 5px solid #1e88e5;
-            padding: 1.5em;
+            background-color: #f2f6fa;
+            padding: 1.5rem;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-top: 1em;
+            border-left: 5px solid #4a90e2;
+            margin-top: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .mensaje {
-            background-color: #e3f2fd;
-            padding: 1em;
-            border-radius: 10px;
-            margin-top: 1em;
-            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #e8f0fe;
+            color: #1a237e;
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 1.05rem;
-            color: #0d47a1;
+            text-align: center;
+            border-radius: 10px;
         }
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1>🗣️ Sistema de Control por Voz</h1>", unsafe_allow_html=True)
-st.markdown("<h3>Interactúa con comandos hablados</h3>", unsafe_allow_html=True)
+# ======= CONTENIDO DE LA APP =======
+st.markdown("<h1>Sistema de Control de Voz</h1>", unsafe_allow_html=True)
+st.markdown("<h3>Interacción mediante audio</h3>", unsafe_allow_html=True)
 
 col1, col2 = st.columns([1, 1])
 
@@ -90,7 +91,7 @@ with col2:
     st.markdown("<div class='caja'>", unsafe_allow_html=True)
     st.markdown("<p>Presiona el botón y habla claramente para controlar el sistema</p>", unsafe_allow_html=True)
 
-    stt_button = Button(label="🎤 Iniciar Reconocimiento", width=260)
+    stt_button = Button(label="🎙️ Iniciar Reconocimiento", width=260)
 
     stt_button.js_on_event("button_click", CustomJS(code="""
         var recognition = new webkitSpeechRecognition();
@@ -124,7 +125,7 @@ with col2:
 
 if result and "GET_TEXT" in result:
     text_result = result.get("GET_TEXT")
-    st.markdown(f"<div class='mensaje'>📢 {text_result}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='mensaje'>{text_result}</div>", unsafe_allow_html=True)
     client1.on_publish = on_publish
     client1.connect(broker, port)
     message = json.dumps({"Act1": text_result.strip()})
@@ -134,3 +135,4 @@ if result and "GET_TEXT" in result:
         os.mkdir("temp")
     except:
         pass
+
